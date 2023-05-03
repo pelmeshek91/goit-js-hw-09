@@ -1,9 +1,9 @@
 body {
-    background-image: url(//img.freepik.com/free-photo/white-alarm-clock-blue-yellow-background-flat-lay_169016-29457.jpg?w=1060&t=st=1683119094~exp=1683119694~hmac=d331a6b4fc7d897783337c7c414b08d8d26e04fc0f7dbb73ee6ad8c1283bfc5f);
+    background-image: url(//img.freepik.com/free-photo/white-alarm-clock-blue-yellow-background-flat-lay_169016-29457.jpg?w=1060&amp;t=st=1683126720~exp=1683127320~hmac=d152d85a7e734cd36d1bc11ed4c9ed3a7a459d9c020256dbef142c00ab4c61c1);
+
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 
 input {
     margin-left: 210px;
