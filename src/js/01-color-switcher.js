@@ -3,20 +3,18 @@ const btnStop = document.querySelector('[data-stop]');
 let intevalId = null;
 
 function changeColor() {
+  btnStart.disabled = true;
   intevalId = setInterval(() => {
     const color = getRandomHexColor();
     document.body.style.backgroundColor = color;
-
-    btnStart.setAttribute('disabled', true);
-    btnStop.removeAttribute('disabled');
+    btnStop.disabled = false;
   }, 1000);
 }
 
 function stopChangeColor() {
   clearInterval(intevalId);
-
-  btnStart.removeAttribute('disabled');
-  btnStop.setAttribute('disabled', true);
+  btnStart.disabled = false;
+  btnStop.disabled = true;
 }
 
 function getRandomHexColor() {
