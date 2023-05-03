@@ -2,10 +2,11 @@
 import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const inputData = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
-
+btnStart.setAttribute('disabled', true);
+const currentTime = Date.now();
 let timerId = null;
 let startTime = new Date();
 
@@ -17,6 +18,18 @@ flatpickr(inputData, {
   onClose(selectedDates) {
     startTime = selectedDates[0];
   },
+});
+
+inputData.addEventListener('input', e => {
+  if (new Date(e.target.value) - currentTime >= 0) {
+    btnStart.removeAttribute('disabled');
+    btnStart.style.color = 'green';
+    Notify.success('Все гуд, можеш тицяти на старт');
+  } else {
+    btnStart.setAttribute('disabled', 'true');
+    btnStart.style.color = 'red';
+    Notify.failure('Вибери іншу дату. Нащо тобі дата в минулому?');
+  }
 });
 
 function countDown() {
