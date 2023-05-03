@@ -20,21 +20,18 @@ flatpickr(inputData, {
   minuteIncrement: 1,
   onClose(selectedDates) {
     startTime = selectedDates[0];
+    if (startTime - currentTime > 0) {
+      btnStart.disabled = false;
+      btnStart.style.color = 'green';
+
+      Notify.success('Все гуд, можеш тицяти на старт🐼 ');
+    } else {
+      btnStart.disabled = true;
+      btnStart.style.color = 'red';
+
+      Notify.failure('Вибери іншу дату. Нащо тобі дата в минулому?🤷‍♀️');
+    }
   },
-});
-
-inputData.addEventListener('input', e => {
-  if (new Date(e.target.value) - currentTime > 0) {
-    btnStart.disabled = false;
-    btnStart.style.color = 'green';
-
-    Notify.success('Все гуд, можеш тицяти на старт🐼 ');
-  } else {
-    btnStart.disabled = true;
-    btnStart.style.color = 'red';
-
-    Notify.failure('Вибери іншу дату. Нащо тобі дата в минулому?🤷‍♀️');
-  }
 });
 
 function countDown() {
@@ -46,6 +43,8 @@ function countDown() {
       clearInterval(timerId);
     } else {
       btnStart.disabled = true;
+      inputData.disabled = true;
+
       const runTime = convertMs(deltaTime);
 
       for (let key in runTime) {
