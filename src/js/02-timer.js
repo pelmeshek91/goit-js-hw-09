@@ -9,8 +9,8 @@ const btnStart = document.querySelector('[data-start]');
 
 btnStart.setAttribute('disabled', true);
 
-const currentTime = Date.now();
 let timerId = null;
+let currentTime = new Date();
 let startTime = new Date();
 
 flatpickr(inputData, {
@@ -28,27 +28,26 @@ inputData.addEventListener('input', e => {
     btnStart.removeAttribute('disabled');
     btnStart.style.color = 'green';
 
-    Notify.success('Все гуд, можеш тицяти на старт');
+    Notify.success('Все гуд, можеш тицяти на старт🐼 ');
   } else {
     btnStart.setAttribute('disabled', 'true');
     btnStart.style.color = 'red';
 
-    Notify.failure('Вибери іншу дату. Нащо тобі дата в минулому?');
+    Notify.failure('Вибери іншу дату. Нащо тобі дата в минулому?🤷‍♀️');
   }
 });
 
 function countDown() {
   timerId = setInterval(() => {
-    const currentTime = Date.now();
-    if (startTime - currentTime < 0) {
-      clearInterval(timerId);
-    } else {
-      const deltaTime = startTime - currentTime;
-      const runTime = convertMs(deltaTime);
+    currentTime = new Date();
 
-      for (let key in runTime) {
-        document.querySelector(`[data-${key}]`).innerHTML = runTime[key];
-      }
+    if (startTime - currentTime < 0) clearInterval(timerId);
+
+    const deltaTime = startTime - currentTime;
+    const runTime = convertMs(deltaTime);
+
+    for (let key in runTime) {
+      document.querySelector(`[data-${key}]`).innerHTML = runTime[key];
     }
   }, 1000);
 }
