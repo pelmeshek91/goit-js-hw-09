@@ -6,7 +6,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const inputData = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
-
+const dayEl = document.querySelector('[data-days]');
+const hourEl = document.querySelector('[data-hours]');
+const minutesEl = document.querySelector('[data-minutes]');
+const secondsEl = document.querySelector('[data-seconds]');
 btnStart.setAttribute('disabled', true);
 
 let timerId = null;
@@ -47,9 +50,11 @@ function countDown() {
 
       const runTime = convertMs(deltaTime);
 
-      for (let key in runTime) {
-        document.querySelector(`[data-${key}]`).innerHTML = runTime[key];
-      }
+      const { days, hours, minutes, seconds } = runTime;
+      dayEl.textContent = days;
+      hourEl.textContent = hours;
+      minutesEl.textContent = minutes;
+      secondsEl.textContent = seconds;
     }
   }, 1000);
 }
